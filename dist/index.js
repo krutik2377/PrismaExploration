@@ -11,7 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-// Same as importing mongoose and conneting to it .
 function insertUser(username, password, firstname, lastname) {
     return __awaiter(this, void 0, void 0, function* () {
         const res = yield prisma.user.create({
@@ -25,4 +24,22 @@ function insertUser(username, password, firstname, lastname) {
         console.log(res);
     });
 }
-insertUser("Krutik@gmail.com", "duq3", "krutik", "dweafds");
+insertUser("Krutik1@gmail.com", "duq3", "krutik", "dweafds");
+function updateUser(username_1, _a) {
+    return __awaiter(this, arguments, void 0, function* (username, { firstname, lastname }) {
+        try {
+            const res = yield prisma.user.update({
+                where: { email: username },
+                data: { firstname, lastname }
+            });
+            console.log('User updated:', res);
+        }
+        catch (er) {
+            console.log(er);
+        }
+    });
+}
+updateUser("Krutik@gmail.com", {
+    firstname: "Kat",
+    lastname: "Kardashaina"
+});
